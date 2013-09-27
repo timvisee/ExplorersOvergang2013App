@@ -40,19 +40,19 @@ public class ConsoleControllerScript : MonoBehaviour {
 		startTime = Time.time;
 			
 		// Schedule some messages
-		scheduledMessages.Add(new List<object>(new object[]{1.0f, "BOOTING FROM FLOPPY..."}));
-		scheduledMessages.Add(new List<object>(new object[]{2.5f, "INITIALIZING SYSTEM..."}));
-		scheduledMessages.Add(new List<object>(new object[]{4.5f, "SYSTEM INITIALIZED!"}));
-		scheduledMessages.Add(new List<object>(new object[]{5.0f, "STARTING MOHICANEN OS..."}));
-		scheduledMessages.Add(new List<object>(new object[]{5.0f, "__________"}));
-		scheduledMessages.Add(new List<object>(new object[]{5.2f, ""}));
-		scheduledMessages.Add(new List<object>(new object[]{5.2f, "MOHICANEN OS v0.24"}));
-		scheduledMessages.Add(new List<object>(new object[]{5.2f, "COPYRIGHT © 2013 MOHICANEN"}));
-		scheduledMessages.Add(new List<object>(new object[]{5.8f, ""}));
-		scheduledMessages.Add(new List<object>(new object[]{5.8f, "VERIFYING ACCOUNT CREDENTIALS..."}));
-		scheduledMessages.Add(new List<object>(new object[]{7.0f, "ACCOUNT CREDENTIALS EXPIRED!"}));
-		scheduledMessages.Add(new List<object>(new object[]{7.2f, ""}));
-		scheduledMessages.Add(new List<object>(new object[]{7.2f, "ENTER SECURITY CODE:"}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 1.0f, "BOOTING FROM FLOPPY..."}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 2.5f, "INITIALIZING SYSTEM..."}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 4.5f, "SYSTEM INITIALIZED!"}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 5.0f, "STARTING MOHICANEN OS..."}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 5.0f, "__________"}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 5.2f, ""}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 5.2f, "MOHICANEN OS v0.24"}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 5.2f, "COPYRIGHT © 2013 MOHICANEN"}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 5.8f, ""}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 5.8f, "VERIFYING ACCOUNT CREDENTIALS..."}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 7.0f, "ACCOUNT CREDENTIALS EXPIRED!"}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 7.2f, ""}));
+		scheduledMessages.Add(new List<object>(new object[]{startTime + 7.2f, "ENTER SECURITY CODE:"}));
 		
 		// Set the pass input timer
 		passInputAt = Time.time + 7.5f;
@@ -67,7 +67,7 @@ public class ConsoleControllerScript : MonoBehaviour {
 			float time = (float) scheduledMessages[i][0];
 			string msg = (string) scheduledMessages[i][1];
 			
-			if(startTime + time <= Time.time) {
+			if(time <= Time.time) {
 				addLine(msg);
 				scheduledMessages.RemoveAt(i);
 				i--;
@@ -98,7 +98,7 @@ public class ConsoleControllerScript : MonoBehaviour {
 		
 		// Get the user input
 		if(passInputEnabled) {
-				        foreach (char c in Input.inputString) {
+			foreach (char c in Input.inputString) {
 				if(c == "\b"[0]) {
 	                if (passInput.Length != 0)
 	                    passInput = passInput.Substring(0, passInput.Length - 1);
